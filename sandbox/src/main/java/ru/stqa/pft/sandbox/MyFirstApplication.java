@@ -1,3 +1,5 @@
+package ru.stqa.pft.sandbox;
+
  class MyFirstApplication {
     public static void main(String[] args){
 

@@ -13,3 +13,11 @@ gradle-app.setting
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
 .idea/workspace.xml
+sandbox/build/classes/java/main/MyFirstApplication.class
+sandbox/src/main/java/MyFirstApplication.java
+sandbox/build/tmp/compileJava/source-classes-mapping.txt
+sandbox/build/libs/sandbox.jar
+sandbox/build/classes/java/main/MyFirstApplication.class
+.idea/.name
+.idea/gradle.xml
+.idea/misc.xml
