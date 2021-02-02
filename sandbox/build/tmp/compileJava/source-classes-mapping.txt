@@ -1,4 +1,4 @@
-ru/stqa/pft/sandbox/MyFirstApplication.java
- ru.stqa.pft.sandbox.MyFirstApplication
 ru/stqa/pft/sandbox/Point.java
  ru.stqa.pft.sandbox.Point
+ru/stqa/pft/sandbox/MyFirstApplication.java
+ ru.stqa.pft.sandbox.MyFirstApplication
