@@ -38,10 +38,25 @@ public class ContactHelper extends HelperBase{
     click(By.name("selected[]"));
   }
 
-
+  private void gotoContactPage() {
+    click(By.linkText("add new"));
+  }
   public void deleteSelectedContact() {
     click(By.xpath("//input[@value='Delete']"));
     wd.switchTo().alert().accept();
+  }
+
+  public void createContact(ContactData contact) {
+    gotoContactPage();
+    fillContactForm(contact);
+    submitContactCreation();
+    returnToContactPage();
+  }
+
+
+
+  public boolean isThereAContact() {
+    return isElementPresent(By.name("selected[]"));
   }
 }
 
