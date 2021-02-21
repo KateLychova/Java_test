@@ -24,16 +24,16 @@ public class GroupHelper extends HelperBase {
     type(By.name("group_footer"), groupData.getFooter());
   }
 
-  public void initGroupCreation() {
-    click(By.name("new"));
+  public void initGroupCreation() { click(By.name("new"));
   }
 
   public void deleteSelectedGroups() {
     click(By.name("delete"));
   }
 
-  public void selectGroup() {
-    click(By.name("selected[]"));
+  public void selectGroup(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
+
   }
 
   public void initGroupModification() {
