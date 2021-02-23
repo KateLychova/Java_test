@@ -1,25 +1,28 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.junit.jupiter.api.Assertions;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
+
+import java.util.List;
 
 public class ContactDeletionTests extends TestBase{
 
 
   @Test
   public void testContactDeletion() throws Exception{
-    app.getNavigationHelper().gotoHomepage();
-    int before = app.getContactHelper().getContactCount();
-    if(! app.getContactHelper().isThereAContact()){
-      app.getContactHelper().createContact(new ContactData("test1", null, null, null, null, null));
-    }
 
-    app.getContactHelper().selectContact();
+
+    if(! app.getContactHelper().isThereAContact()){
+      app.getContactHelper().createContact(new ContactData("test1", "test2", null, null, null, null));
+    }
+    List<ContactData> before = app.getContactHelper().getContactList();
+    app.getContactHelper().selectContact(0);
     app.getContactHelper().deleteSelectedContact();
-    app.getNavigationHelper().gotoHomepage();
-    int after = app.getContactHelper().getContactCount();
-    Assertions.assertEquals(after,before -1);
+
+    List<ContactData> after = app.getContactHelper().getContactList();
+    Assert.assertEquals(after.size(),before.size()  );
+
   }
 
 
