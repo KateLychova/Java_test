@@ -12,7 +12,7 @@ public class ContactCreationTests extends TestBase {
 
 
 
-  
+
 
   @Test
   public void testContactCreation() throws Exception {
@@ -23,8 +23,6 @@ public class ContactCreationTests extends TestBase {
     app.getContactHelper().createContact(contact);
     List<ContactData> after = app.getContactHelper().getContactList();
     Assertions.assertEquals(after.size(),before.size() +1);
-
-
 
 
     before.add(contact);
