@@ -95,6 +95,9 @@ public class ContactHelper extends HelperBase{
   }
 
 
+  public void findElement() {
+    wd.findElement(By.cssSelector("div.msgbox"));
+  }
+  }
 
-}
 
