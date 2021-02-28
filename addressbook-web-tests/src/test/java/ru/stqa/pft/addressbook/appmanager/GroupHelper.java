@@ -57,7 +57,7 @@ public class GroupHelper extends HelperBase {
   public void modify(int index, GroupData group) {
     selectGroup(index);
     initGroupModification();
-    fillGroupForm(new GroupData("test1", "tesr2", "test3"));
+    fillGroupForm(new GroupData().withName("test1").withHeader( "test2").withFooter( "test3"));
     submitGroupModification();
     returntoGroupPage();
   }
@@ -85,8 +85,7 @@ public class GroupHelper extends HelperBase {
       String name= element.getText();
 
       int id = Integer.parseInt( element.findElement(By.tagName("input")).getAttribute("value"));
-      GroupData group = new GroupData(id,name,null,null);
-      groups.add(group);
+      groups.add(new GroupData().withId(id).withName(name));
     }
     return groups;
   }

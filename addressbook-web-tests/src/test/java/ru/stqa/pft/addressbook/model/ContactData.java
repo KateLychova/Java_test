@@ -3,17 +3,54 @@ package ru.stqa.pft.addressbook.model;
 import java.util.Objects;
 
 public class ContactData {
-  public void setId(int id) {
-    this.id = id;
+
+
+  private  int id = Integer.MAX_VALUE;
+  private  String firstname;
+  private  String middlename;
+  private  String lastname;
+  private  String adress;
+  private  String homenumber;
+  private  String mobilenumber;
+
+
+
+  public ContactData withHomenumber(String homenumber) {
+    this.homenumber = homenumber;
+    return this;
   }
 
-  private  int id;
-  private final String firstname;
-  private final String middlename;
-  private final String lastname;
-  private final String adress;
-  private final String homenumber;
-  private final String mobilenumber;
+  public ContactData withAdress(String adress) {
+    this.adress = adress;
+    return this;
+  }
+
+  public ContactData withLastname(String lastname) {
+    this.lastname = lastname;
+    return this;
+  }
+
+  public ContactData withMiddlename(String middlename) {
+    this.middlename = middlename;
+    return this;
+  }
+
+  public ContactData withFirstname(String firstname) {
+    this.firstname = firstname;
+    return this;
+  }
+
+
+
+  public ContactData withMobilenumber(String mobilenumber) {
+    this.mobilenumber = mobilenumber;
+    return this;
+  }
+
+  public ContactData withId(int id) {
+    this.id = id;
+    return this;
+  }
 
 
   public int getId() {
@@ -23,24 +60,7 @@ public class ContactData {
 
 
 
-  public ContactData(String firstname, String middlename, String lastname, String adress, String homenumber, String mobilenumber) {
-    this.id = Integer.MAX_VALUE;
-    this.firstname = firstname;
-    this.middlename = middlename;
-    this.lastname = lastname;
-    this.adress = adress;
-    this.homenumber = homenumber;
-    this.mobilenumber = mobilenumber;
-  }
-  public ContactData(int id, String firstname, String middlename, String lastname, String adress, String homenumber, String mobilenumber) {
-    this.id = id;
-    this.firstname = firstname;
-    this.middlename = middlename;
-    this.lastname = lastname;
-    this.adress = adress;
-    this.homenumber = homenumber;
-    this.mobilenumber = mobilenumber;
-  }
+
 
   public String getFirstname() {
     return firstname;
