@@ -5,8 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -38,15 +39,18 @@ public class ContactHelper extends HelperBase {
 
   }
 
-  public void selectContact(int index) {
-    wd.findElements(By.name("selected[]")).get(index).click();
+
+  public void selectContactById(int id) {
+    wd.findElement(By.cssSelector("input[value='" + id +"']")).click();
 
   }
-
   public void initContactModification(int index) {
     wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
   }
+  public void initContactModificationById(int id) {
 
+    wd.findElement(By.xpath("//img[@alt='Edit']")).click();
+  }
   public void submitContactModification() {
     click(By.name("update"));
   }
@@ -67,22 +71,22 @@ public class ContactHelper extends HelperBase {
     returnToContactPage();
   }
 
-  public void modify(int index, ContactData contact) {
-    initContactModification(index);
+  public void modify(ContactData contact) {
+    initContactModificationById(contact.getId());
 
     fillContactForm(contact);
     submitContactModification();
     returnToHomePage();
   }
 
-  public void delete(int index) {
-    selectContact(index);
+
+  public void delete (ContactData contact) {
+    selectContactById(contact.getId());
     deleteSelectedContact();
     goToHomePage();
 
     findElement();
   }
-
   public void goToHomePage() {
     if (isElementPresent(By.id("maintable"))) {
       return;
@@ -109,8 +113,9 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<ContactData> list() {
-    List<ContactData> contacts = new ArrayList<ContactData>();
+
+  public Set<ContactData> all() {
+    Set<ContactData> contacts = new HashSet<>();
     List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));
     for (WebElement element : elements) {
       List<WebElement> cells = element.findElements(By.tagName("td"));
@@ -122,6 +127,7 @@ public class ContactHelper extends HelperBase {
     }
     return contacts;
   }
+
 
 }
 
