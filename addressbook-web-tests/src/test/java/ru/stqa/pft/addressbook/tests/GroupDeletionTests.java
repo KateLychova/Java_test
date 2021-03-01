@@ -1,11 +1,13 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.junit.jupiter.api.Assertions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class GroupDeletionTests extends TestBase {
@@ -26,15 +28,17 @@ public class GroupDeletionTests extends TestBase {
   public void testGroupDeletion() throws Exception {
 
 
-    Set<GroupData> before = app.group().all();
+    Groups before = app.group().all();
     GroupData deletedGroup = before.iterator().next();
 
     app.group().delete(deletedGroup);
-    Set<GroupData> after = app.group().all();
-    Assertions.assertEquals(after.size(),before.size() -1);
+    Groups after = app.group().all();
+    assertEquals(after.size(),before.size() -1);
 
-    before.remove(deletedGroup);
-    Assertions.assertEquals(before,after);
+
+    assertThat(after, equalTo(before.without(deletedGroup)));
+
+
   }
 
 
