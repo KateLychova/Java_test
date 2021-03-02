@@ -9,9 +9,61 @@ public class ContactData {
   private  String firstname;
   private  String middlename;
   private  String lastname;
+  private String group;
   private  String adress;
   private  String homenumber;
   private  String mobilenumber;
+  private String worknumber;
+  private String allNumbers;
+  private String email;
+  private String email2;
+  private String email3;
+  private String allEmails;
+
+  public String getAllEmails() {
+    return allEmails;
+  }
+
+  public ContactData withAllEmails(String allEmails) {
+    this.allEmails = allEmails;
+    return this;
+  }
+
+  public String getEmail3() {
+    return email3;
+  }
+
+  public ContactData withEmail3(String email3) {
+    this.email3 = email3;
+    return this;
+  }
+
+  public String getEmail2() {
+    return email2;
+  }
+
+  public ContactData withEmail2(String email2) {
+    this.email2 = email2;
+    return this;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
+  }
+
+  public String getAllNumbers() {
+    return allNumbers;
+  }
+
+  public ContactData withAllNumbers(String allNumbers) {
+    this.allNumbers = allNumbers;
+    return this;
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -24,6 +76,10 @@ public class ContactData {
   @Override
   public int hashCode() {
     return Objects.hash(id, firstname, lastname);
+  }
+  public ContactData withWorknumber(String worknumber){
+    this.worknumber = worknumber;
+    return this;
   }
 
   public ContactData withHomenumber(String homenumber) {
@@ -97,6 +153,8 @@ public class ContactData {
     return mobilenumber;
   }
 
+  public String getWorknumber() { return worknumber;}
+
 
   @Override
   public String toString() {
@@ -106,4 +164,6 @@ public class ContactData {
             ", firstname='" + firstname + '\'' +
             '}';
   }
+
+
 }
