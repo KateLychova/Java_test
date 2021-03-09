@@ -21,3 +21,4 @@ sandbox/build/classes/java/main/MyFirstApplication.class
 .idea/.name
 .idea/gradle.xml
 .idea/misc.xml
+*.log
