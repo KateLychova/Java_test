@@ -8,7 +8,7 @@ import java.util.Objects;
 @XStreamAlias("group")
 
 public class GroupData {
-@XStreamOmitField
+  @XStreamOmitField
 
   private  int id = Integer.MAX_VALUE;
 @Expose
