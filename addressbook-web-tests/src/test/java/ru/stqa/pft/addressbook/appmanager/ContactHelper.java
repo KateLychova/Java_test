@@ -115,7 +115,7 @@ public class ContactHelper extends HelperBase {
     contactCache = null;
     goToHomePage();
 
-    findElement();
+
   }
   public void goToHomePage() {
     if (isElementPresent(By.id("maintable"))) {

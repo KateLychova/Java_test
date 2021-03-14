@@ -3,41 +3,102 @@ package ru.stqa.pft.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 import java.util.Objects;
 @XStreamAlias("contact")
+@Entity
+@Table(name = "addressbook")
 
 public class ContactData {
 
 @XStreamOmitField
+@Id
+@Column(name = "id")
   private  int id = Integer.MAX_VALUE;
+
 @Expose
+@Column(name = "firstname")
   private  String firstname;
+
 @Expose
+@Column(name = "middlename")
   private  String middlename;
+
   @Expose
+  @Column(name = "lastname")
   private  String lastname;
+
+  @Transient
   private String group;
+
   @Expose
+  @Column(name = "address")
+  @Type(type = "text")
   private  String adress;
+
   @Expose
+  @Column(name = "home")
+  @Type(type = "text")
   private  String homenumber;
+
+  @Expose
+  @Column(name = "mobile")
+  @Type(type = "text")
   private  String mobilenumber;
+
+  @Expose
+  @Column(name = "work")
+  @Type(type = "text")
   private String worknumber;
+
+  @Transient
   private String allNumbers;
+
+  @Expose
+  @Column(name = "email")
+  @Type(type = "text")
   private String email;
+
+
+  @Expose
+  @Column(name = "email2")
+  @Type(type = "text")
   private String email2;
+
+  @Expose
+  @Column(name = "email3")
+  @Type(type = "text")
   private String email3;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactData that = (ContactData) o;
+    return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(middlename, that.middlename) && Objects.equals(lastname, that.lastname) && Objects.equals(adress, that.adress) && Objects.equals(homenumber, that.homenumber) && Objects.equals(mobilenumber, that.mobilenumber) && Objects.equals(worknumber, that.worknumber) && Objects.equals(email, that.email) && Objects.equals(email2, that.email2) && Objects.equals(email3, that.email3);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, firstname, middlename, lastname, adress, homenumber, mobilenumber, worknumber, email, email2, email3);
+  }
+
+  @Transient
   private String allEmails;
-  private File photo;
+
+  @Column(name ="photo")
+  @Type(type = "text")
+  private String photo;
 
   public File getPhoto() {
-    return photo;
+    return new File(photo);
   }
 
   public ContactData withPhoto(File photo) {
-    this.photo = photo;
+    this.photo = photo.getPath();
     return this;
   }
 
@@ -86,18 +147,6 @@ public class ContactData {
     return this;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ContactData that = (ContactData) o;
-    return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, firstname, lastname);
-  }
   public ContactData withWorknumber(String worknumber){
     this.worknumber = worknumber;
     return this;
