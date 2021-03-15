@@ -7,7 +7,10 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
 @XStreamAlias("contact")
 @Entity
 @Table(name = "addressbook")
@@ -31,8 +34,7 @@ public class ContactData {
   @Column(name = "lastname")
   private  String lastname;
 
-  @Transient
-  private String group;
+
 
   @Expose
   @Column(name = "address")
@@ -73,18 +75,7 @@ public class ContactData {
   @Type(type = "text")
   private String email3;
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ContactData that = (ContactData) o;
-    return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(middlename, that.middlename) && Objects.equals(lastname, that.lastname) && Objects.equals(adress, that.adress) && Objects.equals(homenumber, that.homenumber) && Objects.equals(mobilenumber, that.mobilenumber) && Objects.equals(worknumber, that.worknumber) && Objects.equals(email, that.email) && Objects.equals(email2, that.email2) && Objects.equals(email3, that.email3);
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, firstname, middlename, lastname, adress, homenumber, mobilenumber, worknumber, email, email2, email3);
-  }
 
   @Transient
   private String allEmails;
@@ -92,6 +83,17 @@ public class ContactData {
   @Column(name ="photo")
   @Type(type = "text")
   private String photo;
+
+
+
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups",
+  joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
+
+  public Groups getGroups() {
+    return new Groups(groups);
+  }
 
   public File getPhoto() {
     return new File(photo);
@@ -224,6 +226,20 @@ public class ContactData {
   }
 
   public String getWorknumber() { return worknumber;}
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactData that = (ContactData) o;
+    return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(middlename, that.middlename) && Objects.equals(lastname, that.lastname) && Objects.equals(adress, that.adress) && Objects.equals(homenumber, that.homenumber) && Objects.equals(mobilenumber, that.mobilenumber) && Objects.equals(worknumber, that.worknumber) && Objects.equals(email, that.email) && Objects.equals(email2, that.email2) && Objects.equals(email3, that.email3);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, firstname, middlename, lastname, adress, homenumber, mobilenumber, worknumber, email, email2, email3);
+  }
 
 
   @Override
