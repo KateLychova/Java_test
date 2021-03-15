@@ -3,10 +3,13 @@ package ru.stqa.pft.addressbook.tests;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -55,14 +58,25 @@ public class ContactCreationTests extends TestBase {
 
   }
 
+  @BeforeClass
+  public void ensurePreconditions(){
+    if(app.db().groups().size() == 0){
+      app.goTo().groupPage();
+      app.group().create(new GroupData().withName("test1"));
+    }
+
+  }
+
 
   @Test(dataProvider = "validContactsFromJson")
   public void testContactCreation(ContactData contact) throws Exception {
+    Groups groups = app.db().groups();
+    File photo = new File("src/test/resources/screen.png");
     app.goTo().homePage();
     Contacts before = app.db().contacts();
     app.goTo().contactPage();
-    File photo = new File("src/test/resources/screen.png");
-    app.contact().create(contact.withPhoto(photo));
+
+    app.contact().create(contact.withPhoto(photo).inGroup(groups.iterator().next()));
     assertThat(app.contact().count(),equalTo(before.size() +1));
     Contacts after = app.db().contacts();
 
