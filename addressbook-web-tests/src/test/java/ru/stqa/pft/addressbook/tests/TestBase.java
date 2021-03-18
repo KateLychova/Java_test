@@ -23,9 +23,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class TestBase {
 
   Logger logger = LoggerFactory.getLogger(TestBase.class);
+  protected final ApplicationManeger app = new ApplicationManeger(BrowserType.CHROME);
 
-  protected static final ApplicationManeger app
-          = new ApplicationManeger(System.getProperty("browser", BrowserType.CHROME));
+
 
   @BeforeSuite(alwaysRun = true)
   public void setUp() throws Exception {
