@@ -1,0 +1,31 @@
+apply plugin: 'java'
+
+
+repositories {
+    mavenCentral()
+}
+
+ dependencies {
+    implementation 'com.buschmais.jqassistant.plugin:testng:1.9.0'
+    implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-alpha-7'
+     implementation 'org.testng:testng:7.1.0'
+     implementation 'org.hamcrest:java-hamcrest:2.0.0.0'
+
+ }
+
+ test{
+    useTestNG {
+        suites'scr/test/resourses/testng.xml'
+    }
+    if (project.hasProperty('browser')){
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('target')){
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUI')){
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+}
+
