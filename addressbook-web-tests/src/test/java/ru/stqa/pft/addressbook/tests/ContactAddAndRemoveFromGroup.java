@@ -8,8 +8,6 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
-import java.util.stream.Collectors;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -46,17 +44,16 @@ public class ContactAddAndRemoveFromGroup extends TestBase {
     app.contact().addToGroup(addedContact.getId(), selectedGroup.getId());
     app.goTo().homePage();
     app.contact().filterByGroup(selectedGroup.getId());
+    assertThat(app.db().contactsInGroup(addedContact.getId()).getGroups().contains(selectedGroup), equalTo(true));
 
-    assertThat(addedContact.getGroups().withAdded(selectedGroup), equalTo(app.db().contacts().stream()
-            .filter((c) -> c.getId() == addedContact.getId()).collect(Collectors.toList()).get(0).getGroups()));
+
 
 
     app.contact().deleteContactFromGroup(addedContact);
 
     app.goTo().homePage();
     app.contact().filterByGroup(selectedGroup.getId());
-    assertThat(addedContact.getGroups().without(selectedGroup), equalTo(app.db().contacts().stream().
-            filter((c) -> addedContact.getId() == c.getId()).collect(Collectors.toList()).get(0).getGroups()));
+    assertThat(app.db().contactsInGroup(addedContact.getId()).getGroups().contains(selectedGroup), equalTo(false));
 
   }
 }
