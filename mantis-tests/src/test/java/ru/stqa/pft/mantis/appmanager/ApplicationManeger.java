@@ -10,13 +10,15 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.MatchResult;
 
 public class ApplicationManeger {
   private final Properties properties;
-  protected WebDriver wd;
+  private WebDriver wd;
 
 
   private String browser;
+  private RegistrationHelper registrationHelper;
 
 
   public ApplicationManeger(String browser) {
@@ -32,14 +34,6 @@ public class ApplicationManeger {
 
 
 
-    if (browser.equals(BrowserType.FIREFOX)) {
-      wd = new FirefoxDriver();
-    } else if (browser.equals(BrowserType.CHROME)) {
-      wd = new ChromeDriver();
-    }
-
-    wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-    wd.get(properties.getProperty("web.baseUrl"));
 
 
   }
@@ -47,7 +41,10 @@ public class ApplicationManeger {
 
 
   public void stop() {
-    wd.quit();
+    if(wd != null){
+      wd.quit();
+    }
+
   }
 
   public HttpSession newSession() {
@@ -59,4 +56,24 @@ public class ApplicationManeger {
   }
 
 
+  public RegistrationHelper registration() {
+    if (registrationHelper == null){
+      registrationHelper = new RegistrationHelper(this);
+    }
+    return registrationHelper;
+  }
+
+  public WebDriver getDriver() {
+    if (wd == null)
+      if (browser.equals(BrowserType.FIREFOX)) {
+        wd = new FirefoxDriver();
+      } else if (browser.equals(BrowserType.CHROME)) {
+        wd = new ChromeDriver();
+      }
+
+    wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    wd.get(properties.getProperty("web.baseUrl"));
+
+    return wd;
+  }
 }
