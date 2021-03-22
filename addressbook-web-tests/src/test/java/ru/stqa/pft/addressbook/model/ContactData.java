@@ -266,7 +266,8 @@ public class ContactData {
   }
 
 
-  }
+
+}
 
 
 

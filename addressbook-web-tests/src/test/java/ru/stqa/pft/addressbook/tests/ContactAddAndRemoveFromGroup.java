@@ -31,14 +31,17 @@ public class ContactAddAndRemoveFromGroup extends TestBase {
   public void testContactAddAndRemoveFromGroup() {
 
     Groups groups = app.db().groups();
-    Contacts contacts = app.db().contacts();
-    ContactData addedContact = contacts.iterator().next();
+    Contacts contactNotInGroup = app.db().contactNotInGroup();
+    ContactData addedContact = contactNotInGroup.iterator().next();
     GroupData selectedGroup = groups.iterator().next();
-    if (app.contact().findContactWithoutGroup(contacts) == null) {
+    if(app.db().contactNotInGroup().size() == 0){
+      app.goTo().homePage();
       app.contact().create(new ContactData().withFirstname("test1").withMiddlename("test3").withLastname("test2").withAdress("test4").withHomenumber("test5").withMobilenumber("test6").withWorknumber("test7")
               .withEmail("test8").withEmail2("test9").withEmail3("test10"));
-
     }
+
+
+
 
     app.goTo().homePage();
     app.contact().addToGroup(addedContact.getId(), selectedGroup.getId());
@@ -49,11 +52,30 @@ public class ContactAddAndRemoveFromGroup extends TestBase {
 
 
 
-    app.contact().deleteContactFromGroup(addedContact);
+
+
+  }
+  @Test
+  public void testContactRemoveFromGroup(){
+    Groups groups = app.db().groups();
+    Contacts contactInGroup = app.db().contactInGroup();
+
+    ContactData selectedContact = contactInGroup.iterator().next();
+    GroupData selectedGroup = groups.iterator().next();
+
+    if(app.db().contactInGroup().size() == 0){
+      app.goTo().homePage();
+      app.contact().addToGroup(selectedContact.getId(),selectedGroup.getId());
+    }
+
 
     app.goTo().homePage();
     app.contact().filterByGroup(selectedGroup.getId());
-    assertThat(app.db().contactsInGroup(addedContact.getId()).getGroups().contains(selectedGroup), equalTo(false));
+    app.contact().deleteContactFromGroup(selectedContact);
 
+    app.goTo().homePage();
+    app.contact().filterByGroup(selectedGroup.getId());
+    assertThat(app.db().contactsInGroup(selectedContact.getId()).getGroups().contains(selectedGroup), equalTo(false));
   }
+
 }
