@@ -28,7 +28,7 @@ public class ContactAddAndRemoveFromGroup extends TestBase {
   }
 
   @Test
-  public void testContactAddAndRemoveFromGroup() {
+  public void testContactAddToFromGroup() {
 
     Groups groups = app.db().groups();
     Contacts contactNotInGroup = app.db().contactNotInGroup();
