@@ -13,5 +13,3 @@ $g_phpMailer_method = PHPMAILER_METHOD_SMTP, PHPMAILER_METHOD_SENDMAIL
 
 $g_smtp_host = 'localhost';
 
-//$g_enable_email_notification = ON;
-//$g_log_level = LOG_EMAIL | LOG_EMAIL_RECIPIENT | LOG_EMAIL_VERBOSE;

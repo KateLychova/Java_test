@@ -15,8 +15,8 @@ public class ChangePasswordTest extends TestBase{
 
 @Test
   public void testChangePassword() throws InterruptedException, MessagingException, IOException {
-  Users allUsers = app.db().users();
-  UserData user = allUsers.iterator().next();
+  Users users = app.db().users();
+  UserData user = users.iterator().next();
   String username = user.getUsername();
   String email = user.getEmail();
   app.admin().login("administrator", "root");
