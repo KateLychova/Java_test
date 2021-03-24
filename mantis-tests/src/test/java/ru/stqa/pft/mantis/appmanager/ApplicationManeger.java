@@ -22,6 +22,8 @@ public class ApplicationManeger {
   private FtpHelper ftp;
   private MailHelper mailHelper;
   private JamesHelper jamesHelper;
+  private AdminHelper adminHelper;
+  private DbHelper db;
 
 
   public ApplicationManeger(String browser) {
@@ -30,6 +32,8 @@ public class ApplicationManeger {
     properties = new Properties();
 
   }
+
+
 
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
@@ -96,5 +100,16 @@ public class ApplicationManeger {
     if(jamesHelper == null){
       jamesHelper = new JamesHelper(this);
     }return jamesHelper;
+  }
+  public AdminHelper admin(){
+    if(adminHelper == null){
+      adminHelper = new AdminHelper(this);
+    }return adminHelper;
+  }
+  public DbHelper db() {
+    if (db == null){
+      db = new DbHelper(this);
+    }
+    return db;
   }
 }

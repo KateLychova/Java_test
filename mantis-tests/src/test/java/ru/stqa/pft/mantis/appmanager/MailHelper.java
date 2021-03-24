@@ -2,6 +2,7 @@ package ru.stqa.pft.mantis.appmanager;
 
 import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
+import ru.lanwen.verbalregex.VerbalExpression;
 import ru.stqa.pft.mantis.model.MailMessage;
 
 import javax.mail.MessagingException;
@@ -26,7 +27,7 @@ public class MailHelper {
         return wiser.getMessages().stream().map((m) -> toModelMail(m)).collect(Collectors.toList());
       }
       try {
-        Thread.sleep(1000);
+        Thread.sleep(10000);
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
@@ -46,6 +47,13 @@ public class MailHelper {
       return null;
     }
   }
+  public String findConfirmationLink(List<MailMessage> mailMessages, String email) {
+    MailMessage mailMessage = mailMessages.stream().filter(message -> message.to.equals(email)).reduce((first, second) -> second)
+            .orElse(null);
+    VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
+    return regex.getText(mailMessage.text);
+  }
+
 
   public void start() {
     wiser.start();
@@ -54,4 +62,6 @@ public class MailHelper {
   public void stop() {
     wiser.stop();
   }
+
+
 }

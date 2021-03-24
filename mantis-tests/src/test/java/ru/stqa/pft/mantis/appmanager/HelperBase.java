@@ -15,24 +15,24 @@ public class HelperBase {
     this.app = app;
     this.wd = app.getDriver();
   }
-  protected void click(By lokator) {
-    wd.findElement(lokator).click();
+  protected void click(By locator) {
+    wd.findElement(locator).click();
   }
 
-  protected void type(By lokator, String text) {
-    click(lokator);
+  protected void type(By locator, String text) {
+    click(locator);
     if (text != null){
-      String existingText = wd.findElement(lokator).getAttribute("value");
+      String existingText = wd.findElement(locator).getAttribute("value");
       if(!text.equals(existingText)){
-        wd.findElement(lokator).clear();
-        wd.findElement(lokator).sendKeys(text);
+        wd.findElement(locator).clear();
+        wd.findElement(locator).sendKeys(text);
       }
     }
   }
 
-  protected void attach(By lokator, File file) {
+  protected void attach(By locator, File file) {
     if (file != null){
-      wd.findElement(lokator).sendKeys(file.getAbsolutePath());
+      wd.findElement(locator).sendKeys(file.getAbsolutePath());
     }
   }
 
