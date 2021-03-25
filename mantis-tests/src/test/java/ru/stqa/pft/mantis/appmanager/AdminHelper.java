@@ -24,7 +24,7 @@ public class AdminHelper extends HelperBase{
 
   }
   public void selectUser(String username) {
-    
+
     click(By.xpath(String.format("//a[text() = '%s']", username)));
 
   }
@@ -43,5 +43,8 @@ public class AdminHelper extends HelperBase{
   }
 
 
-
+  public void logout() {
+    click(By.cssSelector("span.user-info"));
+    click(By.xpath("//a[contains(@href, '/mantisbt-2.25.0/logout_page.php')]"));
+  }
 }

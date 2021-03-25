@@ -11,6 +11,8 @@ import javax.mail.MessagingException;
 import java.io.IOException;
 import java.util.List;
 
+import static org.testng.AssertJUnit.assertTrue;
+
 public class ChangePasswordTest extends TestBase{
 
 @Test
@@ -29,10 +31,12 @@ public class ChangePasswordTest extends TestBase{
   app.mail().stop();
   String newPassword = "1111";
   app.admin().changePassword(confirmationLink, newPassword);
-
+ 
   HttpSession session = app.newSession();
+
   Assert.assertTrue(session.login(username, newPassword));
   Assert.assertTrue(session.isLoggedInAs(username));
+
 }
 
 
