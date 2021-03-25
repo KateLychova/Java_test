@@ -24,7 +24,8 @@ public class AdminHelper extends HelperBase{
 
   }
   public void selectUser(String username) {
-    click(By.xpath("//tr[2]/td/a"));
+    
+    click(By.xpath(String.format("//a[text() = '%s']", username)));
 
   }
 

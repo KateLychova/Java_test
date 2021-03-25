@@ -24,11 +24,12 @@ public class ChangePasswordTest extends TestBase{
   app.admin().goToUsersManagePage();
   app.admin().selectUser(username);
   app.admin().resetPassword(username);
-  List<MailMessage> mailMessages = app.mail().waitForMail(2,10000);
+  List<MailMessage> mailMessages = app.mail().waitForMail(1,10000);
   String confirmationLink = app.mail().findConfirmationLink(mailMessages, email);
   app.mail().stop();
   String newPassword = "1111";
   app.admin().changePassword(confirmationLink, newPassword);
+
   HttpSession session = app.newSession();
   Assert.assertTrue(session.login(username, newPassword));
   Assert.assertTrue(session.isLoggedInAs(username));
