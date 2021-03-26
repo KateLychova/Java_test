@@ -31,7 +31,7 @@ public class ChangePasswordTest extends TestBase{
   app.mail().stop();
   String newPassword = "1111";
   app.admin().changePassword(confirmationLink, newPassword);
- 
+
   HttpSession session = app.newSession();
 
   Assert.assertTrue(session.login(username, newPassword));
