@@ -8,7 +8,8 @@ $g_signup_use_captcha = OFF;
 $g_default_timezone       = 'Europe/Berlin';
 
 $g_crypto_master_salt     = 'ejANL4EgIzjDw2N9dCcbTG2dcjh+ye5Zib+z+AUkWHo=';
-$g_phpMailer_method = PHPMAILER_METHOD_SMTP, PHPMAILER_METHOD_SENDMAIL;
+//$g_phpMailer_method = PHPMAILER_METHOD_SMTP, PHPMAILER_METHOD_SENDMAIL;
+$g_phpMailer_method		= PHPMAILER_METHOD_MAIL;
 
 $g_smtp_host = 'localhost';
 
