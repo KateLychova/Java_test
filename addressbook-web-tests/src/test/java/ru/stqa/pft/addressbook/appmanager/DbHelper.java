@@ -43,32 +43,49 @@ public class DbHelper{
   }
 
 
-  public ContactData contactsInGroup(int id) {
+  public ContactData contactById(int id) {
     Session session = sessionFactory.openSession();
     session.beginTransaction();
-    ContactData result = (ContactData)session.createQuery( String.format("from ContactData where id = '%s'", id) ).list().get(0);
+    List<ContactData> result= session.createQuery( String.format("from ContactData where id = '%s'", id) ).list();
     session.getTransaction().commit();
     session.close();
-    return result;
+    return result.iterator().next();
   }
 
+  public Contacts contactWithoutGroups (){
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    List<ContactData> result = session.createQuery( "from ContactData where groups.size = 0 and deprecated = '0000-00-00'" ).list();
+    session.getTransaction().commit();
+    session.close();
+    return new Contacts(result);
+  }
 
-  public Contacts contactNotInGroup() {
+  public Contacts contactWithGroups (){
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    List<ContactData> result = session.createQuery( "from ContactData where groups.size > 0 and deprecated = '0000-00-00'" ).list();
+    session.getTransaction().commit();
+    session.close();
+    return new Contacts(result);
+  }
+
+  public ContactData contactNotInGroup() {
     Session session = sessionFactory.openSession();
     session.beginTransaction();
     List<ContactData> result = session.createQuery("from ContactData where groups.size = 0 and deprecated = '0000-00-00'").list();
     session.getTransaction().commit();
     session.close();
-    return new Contacts(result);
+    return result.iterator().next();
   }
 
-  public Contacts contactInGroup() {
+  public ContactData contactInGroup() {
     Session session = sessionFactory.openSession();
     session.beginTransaction();
     List<ContactData> result = session.createQuery("from ContactData where groups.size > 0 and deprecated = '0000-00-00'").list();
     session.getTransaction().commit();
     session.close();
-    return new Contacts(result);
+    return result.iterator().next();
   }
 }
 

@@ -260,10 +260,7 @@ public class ContactData {
     return this;
   }
 
-  public ContactData outGroup(GroupData group) {
-    groups.remove(group);
-    return this;
-  }
+
 
 
 
