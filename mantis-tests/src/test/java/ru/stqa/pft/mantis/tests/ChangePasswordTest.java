@@ -1,22 +1,21 @@
 package ru.stqa.pft.mantis.tests;
 
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.Test;
 import ru.stqa.pft.mantis.appmanager.HttpSession;
 import ru.stqa.pft.mantis.model.MailMessage;
 import ru.stqa.pft.mantis.model.UserData;
 import ru.stqa.pft.mantis.model.Users;
 
 import javax.mail.MessagingException;
+import javax.xml.rpc.ServiceException;
 import java.io.IOException;
 import java.util.List;
-
-import static org.testng.AssertJUnit.assertTrue;
 
 public class ChangePasswordTest extends TestBase{
 
 @Test
-  public void testChangePassword() throws InterruptedException, MessagingException, IOException {
+  public void testChangePassword() throws InterruptedException, MessagingException, IOException, ServiceException {
   Users users = app.db().users();
   UserData user = users.iterator().next();
   String username = user.getUsername();

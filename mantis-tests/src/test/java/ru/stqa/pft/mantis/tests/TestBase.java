@@ -26,7 +26,12 @@ public class TestBase {
     app.ftp().upload(new File("src/test/resources/config_inc.php"), "config_inc.php", "config_inc.php.bak");
   }
    public boolean isIssueOpen(int issueId) throws RemoteException, ServiceException, MalformedURLException {
-    return  !app.soap().getIssue(issueId).getStatus().equals("resolved");
+
+     if (!app.soap().getIssueStatus(issueId).equals("resolved")) {
+       return true;
+     } else {
+       return false;
+     }
    }
 
 
