@@ -65,7 +65,7 @@ public class ContactAddAndRemoveFromGroup extends TestBase {
 
     ContactData after = app.db().contactById(before.getId());
     assertTrue(after.getGroups().contains(group));
-    
+
 
 
 

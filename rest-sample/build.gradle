@@ -1,0 +1,20 @@
+apply plugin: 'java'
+
+
+
+repositories {
+    mavenCentral()
+}
+test {
+    useTestNG()
+}
+
+dependencies {
+    implementation 'com.buschmais.jqassistant.plugin:testng:1.9.0'
+    implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+    implementation 'org.testng:testng:7.1.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+    implementation 'org.apache.httpcomponents:fluent-hc:4.5.13'
+    implementation 'com.jayway.restassured:rest-assured:2.9.0'
+}
