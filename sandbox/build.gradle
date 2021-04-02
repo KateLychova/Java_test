@@ -11,3 +11,6 @@ dependencies {
     implementation 'com.buschmais.jqassistant.plugin:testng:1.9.0'
     implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
 }
+test {
+    useTestNG()
+}
